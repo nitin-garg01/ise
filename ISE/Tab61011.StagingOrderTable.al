@@ -72,18 +72,12 @@ table 61011 "Staging OrderTable"
         field(15; "Item No."; Code[20])
         {
             Caption = 'Item No.';
-            trigger OnValidate()
-            begin
-                TryCreateOrder();
-            end;
+
         }
         field(16; "Quantity"; Decimal)
         {
             Caption = 'Quantity';
-            trigger OnValidate()
-            begin
-                TryCreateOrder();
-            end;
+
         }
         field(17; "Requested By"; Text[50])
         {
@@ -96,10 +90,7 @@ table 61011 "Staging OrderTable"
         field(19; "Unit Price"; Decimal)
         {
             Caption = 'Unit Price';
-            trigger OnValidate()
-            begin
-                TryCreateOrder();
-            end;
+
         }
         field(20; "Vendor Item Description"; Text[100])
         {
@@ -132,13 +123,11 @@ table 61011 "Staging OrderTable"
         }
     }
 
-    local procedure TryCreateOrder()
+    trigger OnInsert()
     var
-        OrderProcessor: Codeunit "Order Staging Processor";
+        StagingProcessor: Codeunit "Order Staging Processor";
     begin
-        if ("Item No." <> '') and (Quantity > 0) and ("Unit Price" > 0) then begin
-            OrderProcessor.CreateOrder(Rec);
-
-        end;
+        if ("Item No." <> '') and (Quantity > 0) and ("Unit Price" > 0) then
+            StagingProcessor.CreateOrder(Rec);
     end;
 }

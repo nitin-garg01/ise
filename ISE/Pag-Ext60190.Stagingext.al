@@ -9,12 +9,12 @@ pageextension 60190 "Staging ext" extends "List Order Page"
                 Caption = 'Create Order';
                 Image = NewDocument;
                 ApplicationArea = All;
-                trigger OnAction()
-                var
-                    StagingProcessor: Codeunit "Order Staging Processor";
-                begin
-                    StagingProcessor.createorder(Rec);
-                end;
+                // trigger OnAction()
+                // var
+                //     StagingProcessor: Codeunit "Order Staging Processor";
+                // begin
+                //     StagingProcessor.createorder(Rec);
+                // end;
             }
 
         }
