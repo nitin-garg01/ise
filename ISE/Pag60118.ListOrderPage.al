@@ -5,6 +5,7 @@ page 60118 "List Order Page"
     PageType = List;
     SourceTable = "Staging OrderTable";
     UsageCategory = Lists;
+    DelayedInsert = true;
 
     layout
     {
