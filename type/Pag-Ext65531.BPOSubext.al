@@ -1,6 +1,5 @@
 pageextension 65531 "BPO Sub ext" extends "Blanket Purchase Order Subform"
 {
-    ModifyAllowed = true;
     layout
     {
         modify(Quantity)
@@ -45,10 +44,8 @@ pageextension 65531 "BPO Sub ext" extends "Blanket Purchase Order Subform"
     var
         purchheader: Record "Purchase Header";
         ShowQuantity: Boolean;
-
         ShowQtytoreceive: Boolean;
         ShowQuantityReceived: Boolean;
-
         ShowTotalExclvatamount: Boolean;
         ShowLineAmount: Boolean;
         showAmountinclvat: Boolean;
@@ -56,30 +53,12 @@ pageextension 65531 "BPO Sub ext" extends "Blanket Purchase Order Subform"
         ShowLineDisCountAmount: Boolean;
         ShowtotalVatamount: Boolean;
 
-
-
-
     trigger OnAfterGetCurrRecord()
     begin
-        UpdateVisibility();
-        CurrPage.Update();
+        SetVisibility(PurchHeader.Type);
     end;
 
-
-
-    local procedure UpdateVisibility()
-    var
-        PurchHeader: Record "Purchase Header";
-    begin
-        if PurchHeader.Get(Rec.Type) then begin
-            SetVisibility(PurchHeader.Type);
-
-        end;
-    end;
-
-
-
-    local procedure SetVisibility(v: Enum "Type ")
+    local procedure SetVisibility(v: Enum "BPO Type")
     begin
         ShowQuantity := true;
         ShowQtyToReceive := true;
@@ -121,5 +100,7 @@ pageextension 65531 "BPO Sub ext" extends "Blanket Purchase Order Subform"
                     ShowQuantityReceived := false
                 end;
         end;
+        CurrPage.Update();
     end;
+
 }

@@ -6,10 +6,10 @@ pageextension 65102 "Blanket page ext" extends "Blanket Purchase Order"
         {
             field(Type; Rec.Type)
             {
-
+                ApplicationArea = all;
                 trigger OnValidate()
                 begin
-                    CurrPage.PurchLines.Page.Update();
+                    CurrPage.Update();
                 end;
             }
         }

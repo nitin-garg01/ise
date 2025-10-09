@@ -1,4 +1,4 @@
-enum 63663 "Type "
+enum 63663 "BPO Type"
 {
     Extensible = true;
     value(0; blank)
