@@ -18,7 +18,7 @@ pageextension 65531 "BPO Sub ext" extends "Blanket Purchase Order Subform"
         }
         modify("Total Amount Excl. VAT")
         {
-            Visible = ShowTotalamount;
+            Visible = ShowTotalExclvatamount;
         }
         modify("Quantity Invoiced")
         {
@@ -38,7 +38,7 @@ pageextension 65531 "BPO Sub ext" extends "Blanket Purchase Order Subform"
         }
         modify("Total VAT Amount")
         {
-            Visible = ShowVatamount;
+            Visible = ShowtotalVatamount;
         }
 
     }
@@ -49,68 +49,77 @@ pageextension 65531 "BPO Sub ext" extends "Blanket Purchase Order Subform"
         ShowQtytoreceive: Boolean;
         ShowQuantityReceived: Boolean;
 
-        ShowTotalamount: Boolean;
+        ShowTotalExclvatamount: Boolean;
         ShowLineAmount: Boolean;
         showAmountinclvat: Boolean;
         ShowQuantityinvoiced: Boolean;
         ShowLineDisCountAmount: Boolean;
-        ShowVatamount: Boolean;
+        ShowtotalVatamount: Boolean;
+
+
+
 
     trigger OnAfterGetCurrRecord()
     begin
         UpdateVisibility();
-    end;
-
-    local procedure UpdateVisibility()
-    begin
-        if Rec."Document No." = '' then
-            exit;
-        if purchheader.Get(Rec.Type) then
-            SetVisibility(purchheader.Type);
         CurrPage.Update();
     end;
 
-    local procedure SetVisibility(TypeOption: Enum "Type ")
+
+
+    local procedure UpdateVisibility()
+    var
+        PurchHeader: Record "Purchase Header";
+    begin
+        if PurchHeader.Get(Rec.Type) then begin
+            SetVisibility(PurchHeader.Type);
+
+        end;
+    end;
+
+
+
+    local procedure SetVisibility(v: Enum "Type ")
     begin
         ShowQuantity := true;
         ShowQtyToReceive := true;
         ShowQuantityReceived := true;
-        ShowTotalAmount := true;
+        ShowTotalExclvatamount := true;
         ShowLineAmount := true;
         ShowAmountInclVat := true;
         ShowQuantityInvoiced := true;
         ShowLineDiscountAmount := true;
-        ShowVatAmount := true;
+        ShowtotalVatamount := true;
 
-        case TypeOption of
-            TypeOption::QunatityWise:
+        case v of
+            v::blank:
+                begin
+                    Error('select quantity wise or value wise');
+                end;
+            v::QunatityWise:
                 begin
                     ShowQuantity := true;
                     ShowQtyToReceive := true;
                     ShowQuantityReceived := true;
                     ShowQuantityInvoiced := true;
-
                     ShowLineAmount := false;
-                    ShowTotalAmount := false;
-                    ShowAmountInclVat := false;
-                    ShowLineDiscountAmount := false;
-                    ShowVatAmount := false;
+                    showAmountinclvat := false;
+                    ShowTotalExclvatamount := false;
+                    ShowtotalVatamount := false;
+
                 end;
 
-            TypeOption::ValueWise:
+            v::ValueWise:
                 begin
-                    ShowQuantity := false;
-                    ShowQtyToReceive := false;
-                    ShowQuantityReceived := false;
-                    ShowQuantityInvoiced := false;
-
                     ShowLineAmount := true;
-                    ShowTotalAmount := true;
+                    ShowTotalExclvatamount := true;
                     ShowAmountInclVat := true;
                     ShowLineDiscountAmount := true;
-                    ShowVatAmount := true;
+                    ShowtotalVatamount := true;
+                    ShowQuantity := false;
+                    ShowQtyToReceive := false;
+                    ShowQuantityReceived := false
                 end;
-            else
         end;
     end;
 }
