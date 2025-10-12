@@ -7,17 +7,22 @@ codeunit 65432 "Sales-Staging"
         SalesLine: Record "Sales Line";
         TempTable: Record "Middle Table";
     begin
-        SalesHead.SetRange("Document Type", SalesHead."Document Type");
         if SalesHead.FindSet() then
             repeat
-                if SalesLine.Get(SalesHead."No.") then
+
+                SalesLine.SetRange("Document Type", SalesHead."Document Type");
+                SalesLine.SetRange("Document No.", SalesHead."No.");
+
+                if SalesLine.FindSet() then
                     repeat
                         TempTable.Init();
+                        // sales header
                         TempTable."Document Type" := Format(SalesHead."Document Type");
                         TempTable."Document No." := SalesHead."No.";
-                        TempTable."Customer Name" := SalesHead."Bill-to Name";
-                        TempTable."Item No." := SalesLine."Item Reference No.";
+                        TempTable."Customer Name" := SalesHead."Sell-to Customer Name";
                         TempTable."Document date" := SalesHead."Order Date";
+                        // sales line
+                        TempTable."Item No." := SalesLine."Item Reference No.";
                         TempTable.Quantity := SalesLine.Quantity;
                         TempTable."Unit Of Measure" := SalesLine."Unit of Measure Code";
                         TempTable."Unit Price" := SalesLine."Unit Price";

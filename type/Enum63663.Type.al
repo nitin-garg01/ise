@@ -1,9 +1,9 @@
 enum 63663 "BPO Type"
 {
     Extensible = true;
-    value(0; blank)
+    value(0; " ")
     {
-        Caption = 'blank';
+        Caption = ' ';
     }
     value(1; QunatityWise)
     {

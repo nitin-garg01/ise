@@ -9,11 +9,10 @@ pageextension 65531 "BPO Sub ext" extends "Blanket Purchase Order Subform"
         modify("Quantity Received")
         {
             Visible = ShowQuantityReceived;
-
         }
         modify("Qty. to Receive")
         {
-            Visible = ShowQtytoreceive;
+            Visible = ShowQtyToReceive;
         }
         modify("Total Amount Excl. VAT")
         {
@@ -25,11 +24,12 @@ pageextension 65531 "BPO Sub ext" extends "Blanket Purchase Order Subform"
         }
         modify("Line Amount")
         {
+
             Visible = ShowLineAmount;
         }
         modify("Total Amount Incl. VAT")
         {
-            Visible = showAmountinclvat;
+            Visible = ShowAmountInclvat;
         }
         modify("Line Discount Amount")
         {
@@ -37,70 +37,142 @@ pageextension 65531 "BPO Sub ext" extends "Blanket Purchase Order Subform"
         }
         modify("Total VAT Amount")
         {
-            Visible = ShowtotalVatamount;
+            Visible = ShowTotalVatAmount;
         }
-
+        modify("Direct Unit Cost")
+        {
+            Visible = ShowDirecUnitCost;
+        }
     }
     var
-        purchheader: Record "Purchase Header";
+
         ShowQuantity: Boolean;
-        ShowQtytoreceive: Boolean;
         ShowQuantityReceived: Boolean;
+        ShowQtyToReceive: Boolean;
         ShowTotalExclvatamount: Boolean;
-        ShowLineAmount: Boolean;
-        showAmountinclvat: Boolean;
         ShowQuantityinvoiced: Boolean;
+        ShowLineAmount: Boolean;
+        ShowAmountInclvat: Boolean;
+
         ShowLineDisCountAmount: Boolean;
-        ShowtotalVatamount: Boolean;
+        ShowTotalVatAmount: Boolean;
+        ShowDirecUnitCost: Boolean;
+
+    trigger OnAfterGetRecord()
+    begin
+        SetVisibility();
+    end;
 
     trigger OnAfterGetCurrRecord()
     begin
-        SetVisibility(PurchHeader.Type);
+        SetVisibility();
     end;
 
-    local procedure SetVisibility(v: Enum "BPO Type")
+    local procedure SetVisibility()
+    var
+        Header: Record "Purchase Header";
     begin
+
         ShowQuantity := true;
-        ShowQtyToReceive := true;
         ShowQuantityReceived := true;
-        ShowTotalExclvatamount := true;
+        ShowQtyToReceive := true;
+
+        ShowQuantityinvoiced := true;
+
         ShowLineAmount := true;
-        ShowAmountInclVat := true;
-        ShowQuantityInvoiced := true;
-        ShowLineDiscountAmount := true;
-        ShowtotalVatamount := true;
+        ShowAmountInclvat := true;
+        ShowTotalExclvatamount := true;
+        ShowLineDisCountAmount := true;
+        ShowTotalVatAmount := true;
+        ShowDirecUnitCost := true;
 
-        case v of
-            v::blank:
-                begin
-                    Error('select quantity wise or value wise');
-                end;
-            v::QunatityWise:
-                begin
-                    ShowQuantity := true;
-                    ShowQtyToReceive := true;
-                    ShowQuantityReceived := true;
-                    ShowQuantityInvoiced := true;
-                    ShowLineAmount := false;
-                    showAmountinclvat := false;
-                    ShowTotalExclvatamount := false;
-                    ShowtotalVatamount := false;
+        if Header.Get(Rec."Document Type", Rec."Document No.") then begin
 
-                end;
+            // Type = Blank
+            if Header.Type = Header.Type::" " then begin
+                ShowQuantity := false;
+                ShowQuantityReceived := false;
+                ShowQtyToReceive := false;
+                ShowQuantityinvoiced := false;
+                ShowLineAmount := false;
+                ShowAmountInclvat := false;
+                ShowTotalExclvatamount := false;
+                ShowLineDisCountAmount := false;
+                ShowTotalVatAmount := false;
+                ShowDirecUnitCost := false;
+            end
+            // Type = QuantityWise
+            else if Header.Type = Header.Type::QunatityWise then begin
+                ShowQuantity := true;
+                ShowQuantityReceived := true;
+                ShowQtyToReceive := true;
+                ShowQuantityinvoiced := true;
 
-            v::ValueWise:
-                begin
-                    ShowLineAmount := true;
-                    ShowTotalExclvatamount := true;
-                    ShowAmountInclVat := true;
-                    ShowLineDiscountAmount := true;
-                    ShowtotalVatamount := true;
-                    ShowQuantity := false;
-                    ShowQtyToReceive := false;
-                    ShowQuantityReceived := false
-                end;
+                ShowLineAmount := false;
+                ShowAmountInclvat := false;
+                ShowTotalExclvatamount := false;
+                ShowLineDisCountAmount := false;
+                ShowTotalVatAmount := false;
+                ShowDirecUnitCost := false;
+            end
+            // Type = ValueWise
+            else if Header.Type = Header.Type::ValueWise then begin
+                ShowQuantity := false;
+                ShowQuantityReceived := false;
+                ShowQtyToReceive := false;
+                ShowQuantityinvoiced := false;
+
+                ShowLineAmount := true;
+                ShowAmountInclvat := true;
+                ShowTotalExclvatamount := true;
+                ShowLineDisCountAmount := true;
+                ShowTotalVatAmount := true;
+                ShowDirecUnitCost := true;
+            end;
+
+            CurrPage.Update(false);
         end;
-        CurrPage.Update();
     end;
+
+    //     if Header.Get(Rec."Document Type", Rec."Document No.") then begin
+    //         case Header.Type of
+    //             Header.Type::" ":
+    //                 begin
+    //                     ShowQuantity := false;
+    //                     ShowQuantityReceived := false;
+    //                     ShowQtyToReceive := false;
+    //                     ShowQuantityinvoiced := false;
+    //                     ShowLineAmount := false;
+    //                     ShowAmountInclvat := false;
+    //                     ShowTotalExclvatamount := false;
+    //                     ShowLineDisCountAmount := false;
+    //                     ShowTotalVatAmount := false;
+    //                     ShowDirecUnitCost := false;
+    //                 end;
+
+    //             Header.Type::QunatityWise:
+    //                 begin
+
+    //                     ShowQuantity := true;
+    //                     ShowQuantityReceived := true;
+    //                     ShowQtyToReceive := true;
+    //                     ShowQuantityinvoiced := true;
+    //                 end;
+
+    //             Header.Type::ValueWise:
+    //                 begin
+    //                     ShowLineAmount := true;
+    //                     ShowAmountInclvat := true;
+    //                     ShowTotalExclvatamount := true;
+    //                     ShowLineDisCountAmount := true;
+    //                     ShowTotalVatAmount := true;
+    //                     ShowDirecUnitCost := true;
+    //                 end;
+    //         end;
+    //         CurrPage.Update(false);
+    //     end;
+
+
+    // end;
 
 }

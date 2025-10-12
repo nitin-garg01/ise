@@ -15,5 +15,8 @@ pageextension 65102 "Blanket page ext" extends "Blanket Purchase Order"
         }
     }
 
-
+    trigger OnAfterGetCurrRecord()
+    begin
+        CurrPage.Update();
+    end;
 }

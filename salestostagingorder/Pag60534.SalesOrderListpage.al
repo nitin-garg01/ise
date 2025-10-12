@@ -103,10 +103,7 @@ page 60534 "Sales Order List page"
                 var
                     TempStagingMgt: Codeunit "Sales-Staging";
                 begin
-
                     TempStagingMgt.SalestoStaging();
-
-
                     CurrPage.Update();
                 end;
             }
