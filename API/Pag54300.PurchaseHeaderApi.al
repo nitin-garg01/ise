@@ -73,12 +73,12 @@ page 54300 "Purchase Header Api"
     }
     var
         DocumentDate: Date;
-        BuyerId: Code[20];
+        BuyerId: Text[50];
         Contact: Text[50];
         ConfirmBy: Text[50];
         TaxScduleId: Code[20];
         CurrencyId: Code[10];
-        Notes: Text[50];
+        Notes: Text[100];
         UserDefind: Text[50];
 
     trigger OnInsertRecord(BelowxRec: Boolean): Boolean

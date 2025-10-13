@@ -68,12 +68,12 @@ page 65473 "Sales Header API"
     }
     var
         DocumentDate: Date;
-        BuyerId: Code[20];
+        BuyerId: Text[50];
         Contact: Text[50];
         ConfirmBy: Text[50];
         TexScduleId: Code[20];
         CurrencyId: Code[10];
-        Notes: Text[50];
+        Notes: Text[100];
         UserDefind: Text[50];
 
     trigger OnInsertRecord(BelowxRec: Boolean): Boolean
@@ -85,8 +85,6 @@ page 65473 "Sales Header API"
     var
         StagingOrder: Record "Staging OrderTable";
         LastEntryNo: Integer;
-
-
     begin
         StagingOrder.Init();
         StagingOrder."Entry No." := LastEntryNo + 1;
@@ -101,6 +99,5 @@ page 65473 "Sales Header API"
         StagingOrder."Notes" := Notes;
         StagingOrder."user Defind" := UserDefind;
         StagingOrder.Insert();
-
     end;
 }

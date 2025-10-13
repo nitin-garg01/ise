@@ -58,7 +58,7 @@ page 63214 "Sales Line API"
     var
         RequestedBy: Text[50];
         NonInventory: Boolean;
-        VendorItemDescription: Text[50];
+        VendorItemDescription: Text[100];
         CurrencyId: Code[10];
         UnitOfMeasure: Code[10];
         UserDefind: Text[50];
