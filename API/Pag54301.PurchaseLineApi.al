@@ -20,53 +20,61 @@ page 54301 "Purchase Line Api"
             {
                 field(potype; Rec."Document Type")
                 {
+                    Caption = 'PO type';
 
                 }
                 field(poNumber; Rec."No.")
                 {
+                    Caption = 'PO Number';
 
                 }
                 field(vendorid; rec."No.")
                 {
+                    Caption = 'Vendor Id';
 
                 }
 
                 field(itemNumber; Rec."Item Reference Type No.")
                 {
+                    Caption = 'Item Number';
 
                 }
                 field(quantity; Rec.Quantity)
                 {
+                    Caption = 'Quantity';
 
                 }
                 field(RequestedBy; RequestedBy)
                 {
+                    Caption = 'Requested By';
 
                 }
                 field(noninventory; NonInventory)
                 {
-
+                    Caption = 'Non Inventory';
                 }
                 field(unitcost; Rec."Unit Cost")
                 {
-
+                    Caption = 'Unit Cost';
                 }
 
                 field(VendorItemDescription; VendorItemDescription)
                 {
-
+                    Caption = 'Vendor Item Description';
                 }
                 field(unitofmeasure; UnitOfMeasure)
                 {
+                    Caption = 'Unit Of Measure';
 
                 }
                 field(currencyid; CurrencyId)
                 {
+                    Caption = 'Currency Id';
 
                 }
                 field(userDefind; UserDefind)
                 {
-
+                    Caption = 'User Defind';
                 }
 
             }

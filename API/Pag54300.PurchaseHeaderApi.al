@@ -19,55 +19,48 @@ page 54300 "Purchase Header Api"
             {
                 field(potype; Rec."Document Type")
                 {
-
+                    Caption = 'POType';
                 }
                 field(ponumber; Rec."Vendor Invoice No.")
                 {
-
+                    Caption = 'PONumber';
                 }
-
                 field(vendorId; Rec."No.")
                 {
-
+                    Caption = 'Vendor ID';
                 }
-
                 field(documentdate; Rec."Document Date")
                 {
-
+                    Caption = 'Document Date';
                 }
                 field(buyerid; BuyerId)
                 {
-
+                    Caption = 'Buyer ID';
                 }
-
                 field(contact; Contact)
                 {
-
+                    Caption = 'Contact';
                 }
                 field(confirmby; ConfirmBy)
                 {
-
+                    Caption = 'Confirm By';
                 }
-                field(taxscduleid; TaxScduleId)
+                field(taxschedule; TaxSchedule)
                 {
-
+                    Caption = 'Tax Schedule';
                 }
                 field(currencyid; CurrencyId)
                 {
-
-
+                    Caption = 'Currency ID';
                 }
-
                 field(notes; Notes)
                 {
-
+                    Caption = 'Notes';
                 }
                 field(userdefind; UserDefind)
                 {
-
+                    Caption = 'User Defind';
                 }
-
-
             }
         }
     }
@@ -76,7 +69,7 @@ page 54300 "Purchase Header Api"
         BuyerId: Text[50];
         Contact: Text[50];
         ConfirmBy: Text[50];
-        TaxScduleId: Code[20];
+        taxSchedule: Code[20];
         CurrencyId: Code[10];
         Notes: Text[100];
         UserDefind: Text[50];
@@ -103,7 +96,7 @@ page 54300 "Purchase Header Api"
         StagingOrderTable."Buyer Name" := BuyerId;
         StagingOrderTable."Contact Person" := Contact;
         StagingOrderTable."Confirmed By" := ConfirmBy;
-        StagingOrderTable."Tax Schedule" := TaxScduleId;
+        StagingOrderTable."Tax Schedule" := taxSchedule;
         StagingOrderTable."Currency Id" := CurrencyId;
         StagingOrderTable."Notes" := Notes;
         Stagingordertable."user Defind" := UserDefind;

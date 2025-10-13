@@ -45,7 +45,7 @@ page 65473 "Sales Header API"
                 {
 
                 }
-                field(texscduleid; TexScduleId)
+                field(texscduleid; taxSchedule)
                 {
 
                 }
@@ -71,7 +71,7 @@ page 65473 "Sales Header API"
         BuyerId: Text[50];
         Contact: Text[50];
         ConfirmBy: Text[50];
-        TexScduleId: Code[20];
+        taxSchedule: Code[20];
         CurrencyId: Code[10];
         Notes: Text[100];
         UserDefind: Text[50];
@@ -94,7 +94,7 @@ page 65473 "Sales Header API"
         StagingOrder."Buyer Name" := BuyerId;
         StagingOrder."Contact Person" := Contact;
         StagingOrder."Confirmed By" := ConfirmBy;
-        StagingOrder."Tax Schedule" := TexScduleId;
+        StagingOrder."Tax Schedule" := taxSchedule;
         StagingOrder."Currency Id" := CurrencyId;
         StagingOrder."Notes" := Notes;
         StagingOrder."user Defind" := UserDefind;
