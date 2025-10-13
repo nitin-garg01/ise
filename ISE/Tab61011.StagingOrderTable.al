@@ -112,7 +112,14 @@ table 61011 "Staging OrderTable"
         {
             Caption = 'Line No.';
         }
+        field(25; "user Defind"; Text[50])
+        {
 
+        }
+        field(26; "Unit Cost"; Decimal)
+        {
+
+        }
     }
 
     keys
