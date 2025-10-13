@@ -84,9 +84,12 @@ page 65473 "Sales Header API"
     local procedure InsertIntoStagingTable()
     var
         StagingOrder: Record "Staging OrderTable";
+        LastEntryNo: Integer;
+
 
     begin
         StagingOrder.Init();
+        StagingOrder."Entry No." := LastEntryNo + 1;
         StagingOrder."Document No." := Rec."No.";
         StagingOrder."Document Date" := Rec."Document Date";
         StagingOrder."Customer/Vendor No." := Rec."Sell-to Customer No.";
@@ -98,9 +101,6 @@ page 65473 "Sales Header API"
         StagingOrder."Notes" := Notes;
         StagingOrder."user Defind" := UserDefind;
         StagingOrder.Insert();
-
-        StagingOrder.Insert()
-
 
     end;
 }
