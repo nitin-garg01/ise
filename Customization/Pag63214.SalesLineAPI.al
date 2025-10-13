@@ -27,48 +27,31 @@ page 63214 "Sales Line API"
                 }
                 field(vendorid; rec."No.")
                 {
-
                 }
                 field(quantity; Rec.Quantity)
                 {
-
                 }
-
-
-
-
-
                 field(RequestedBy; RequestedBy)
                 {
-
                 }
                 field(noninventory; NonInventory)
                 {
-
                 }
-
                 field(unitcost; Rec."Unit Cost")
                 {
-
                 }
                 field(vendorItemDescription; VendorItemDescription)
                 {
-
                 }
-
                 field(unitofmeasure; UnitOfMeasure)
                 {
-
                 }
                 field(currencyid; CurrencyId)
                 {
-
                 }
                 field(userDefind; UserDefind)
                 {
-
                 }
-
             }
         }
     }
