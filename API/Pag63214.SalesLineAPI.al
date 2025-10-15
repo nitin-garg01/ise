@@ -5,12 +5,11 @@ page 63214 "Sales Line API"
     APIVersion = 'v1.0';
     ApplicationArea = All;
     Caption = 'salesLineAPI';
-    DelayedInsert = true;
     EntityName = 'SalesLine';
     EntitySetName = 'SalesLines';
     PageType = API;
+    DelayedInsert = true;
     SourceTable = "Sales Line";
-
     layout
     {
         area(Content)
@@ -19,11 +18,9 @@ page 63214 "Sales Line API"
             {
                 field(potype; Rec."Document Type")
                 {
-
                 }
                 field(ponumber; Rec."No.")
                 {
-
                 }
                 field(vendorid; rec."No.")
                 {
@@ -62,7 +59,6 @@ page 63214 "Sales Line API"
         CurrencyId: Code[10];
         UnitOfMeasure: Code[10];
         UserDefind: Text[50];
-
     local procedure insertintostaging()
     var
         stagingtable: Record "Staging OrderTable";

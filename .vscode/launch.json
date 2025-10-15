@@ -7,7 +7,7 @@
             "type": "al",
             "tenant": "f6dbac9c-35f9-48f8-a538-a41f4d3f3497",
             "environmentType": "Sandbox",
-            "environmentName": "KP-Training",
+            "environmentName": "KP-DEV",
             "startupObjectId": 22,
             "startupObjectType": "Page",
             "breakOnError": "All",

@@ -10,7 +10,14 @@
   "help": "",
   "url": "",
   "logo": "",
-  "dependencies": [],
+  "dependencies": [
+    {
+     "appId":"57f19c35-43f8-4ef3-8cc6-f6c061a554da",
+   "name": "KenpatIntegrations",
+   "publisher": "Codinix",
+     "version": "1.0.0.48"
+    }
+  ],
   "screenshots": [],
   "platform": "1.0.0.0",
   "application": "26.0.0.0",
